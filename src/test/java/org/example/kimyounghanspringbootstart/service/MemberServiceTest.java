@@ -6,6 +6,7 @@ import org.example.kimyounghanspringbootstart.repository.MemberRepository;
 import org.example.kimyounghanspringbootstart.repository.MemoryMemberRepository;
 import org.example.kimyounghanspringbootstart.repository.MemoryMemberRepositoryTest;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -14,8 +15,18 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class MemberServiceTest {
     // 테스트는 정상 플로우도 중요한데 예외 플로우가 훨씬 중요.
-    MemberService memberService = new MemberService();
-    MemoryMemberRepository memoryMemberRepository = new MemoryMemberRepository();
+
+//    MemberService memberService = new MemberService();
+//    MemoryMemberRepository memoryMemberRepository = new MemoryMemberRepository();
+    MemberService memberService;
+    MemoryMemberRepository memoryMemberRepository;
+
+    @BeforeEach // 동작하기 전에 넣어줌.
+    public void beforeEach() {
+        memoryMemberRepository = new MemoryMemberRepository();
+        memberService = new MemberService(memoryMemberRepository);
+    }   // MemberService를 생성할 때 내가 MemberMemoryRepository를 내가 직접 넣어줘야 함.
+        // Test 실행할 때마다 두 객체를 각각 생성함.   =>  Test는 독립적으로 실행이 돼야 하기 때문.
 
     @AfterEach
     public void afterEach() {                   // 메서드가 실행이 끝날 때마다 어떤 동작을 하는 것 (-> 콜백 메서드라 생각)

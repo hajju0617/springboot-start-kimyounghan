@@ -8,7 +8,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class MemberService {    // ctrl + shift + T : 테스트 코드 생성
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+//    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;    // MemberService 입장에서 내가 직접 new 하지 않음.
+                                                        // 외부에서 MemoryMemberRepository를 외부에서 넣어줌.
+                                                        // 이것을 의존성주입 (DI) 라고 한다.
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     // 회원가입
     public Long join(Member member) {
