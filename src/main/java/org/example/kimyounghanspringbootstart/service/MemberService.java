@@ -20,7 +20,8 @@ public class MemberService {    // ctrl + shift + T : 테스트 코드 생성
 //        });
         // Optional을 바로 반환하는 것은 별로 좋지 않음 또한 코드가 안 예쁨.
         // 아래 처럼 수정.
-        validateDuplicateMember(member);    // ctrl + alt + m (or) ctrl + alt + shift + T Extract Method
+        validateDuplicateMember(member);        // 중복 회원 검증
+                                                // ctrl + alt + m (or) ctrl + alt + shift + T Extract Method
         // 메서드로 만듦.
 
         memberRepository.save(member);
@@ -29,7 +30,7 @@ public class MemberService {    // ctrl + shift + T : 테스트 코드 생성
     private void validateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName())   // findByName의 결과는 Optional 멤버
                 .ifPresent(m -> {
-            throw new IllegalStateException("이미 존재하는 회원입니다");
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
         });
     }
 
